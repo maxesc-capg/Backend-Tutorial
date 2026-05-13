@@ -33,7 +33,7 @@ public class CategoryController {
      * @return {@link List} de {@link CategoryDto}
      */
     @Operation(summary = "Find", description = "Method that return a list of Categories")
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @GetMapping(path = "") // Importante poner la ruta
     public List<CategoryDto> findAll() {
 
         List<Category> categories = this.categoryService.findAll();
