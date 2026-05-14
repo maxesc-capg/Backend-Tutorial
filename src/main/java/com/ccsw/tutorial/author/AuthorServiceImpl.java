@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author ccsw
  *
@@ -42,7 +44,7 @@ public class AuthorServiceImpl implements AuthorService {
         } else {
             author = this.authorRepository.findById(id).orElse(null);
         }
-        
+
         BeanUtils.copyProperties(data, author, "id");
 
         this.authorRepository.save(author);
@@ -59,6 +61,16 @@ public class AuthorServiceImpl implements AuthorService {
         }
 
         this.authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Author get(Long existsAuthorId) {
+        return null;
+    }
+
+    @Override
+    public List<Author> findAll() {
+        return List.of();
     }
 
 }

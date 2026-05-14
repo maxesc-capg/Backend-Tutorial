@@ -19,6 +19,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Override
+    public Category get(Long id) {
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
