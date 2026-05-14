@@ -31,7 +31,6 @@ public class AuthorServiceImpl implements AuthorService {
         return this.authorRepository.findAll(dto.getPageable().getPageable());
     }
 
-    @Override
     public List<Author> findAll() {
         return List.of();
     }
