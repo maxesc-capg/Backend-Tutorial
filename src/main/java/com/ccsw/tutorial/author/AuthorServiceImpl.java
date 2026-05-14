@@ -42,8 +42,7 @@ public class AuthorServiceImpl implements AuthorService {
         } else {
             author = this.authorRepository.findById(id).orElse(null);
         }
-
-        assert author != null;
+        
         BeanUtils.copyProperties(data, author, "id");
 
         this.authorRepository.save(author);
