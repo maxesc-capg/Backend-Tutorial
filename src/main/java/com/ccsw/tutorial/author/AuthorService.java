@@ -35,4 +35,5 @@ public interface AuthorService {
      */
     void delete(Long id) throws Exception;
 
+    Author get(Long existsAuthorId);
 }
