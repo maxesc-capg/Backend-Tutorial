@@ -2,22 +2,26 @@ package com.ccsw.tutorial.author;
 
 import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.author.model.AuthorDto;
-import org.springframework.stereotype.Service;
+import com.ccsw.tutorial.author.model.AuthorSearchDto;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
-
-@Service
+/**
+ * @author ccsw
+ *
+ */
 public interface AuthorService {
 
     /**
-     * Método para recuperar todas las {@link Author}
+     * Método para recuperar un listado paginado de {@link Author}
      *
-     * @return {@link List} de {@link Author}
+     * @param dto dto de búsqueda
+     * @return {@link Page} de {@link Author}
      */
-    List<Author> findAll();
+
+    Page<Author> findPage(AuthorSearchDto dto);
 
     /**
-     * Método para crear o actualizar una {@link Author}
+     * Método para crear o actualizar un {@link Author}
      *
      * @param id PK de la entidad
      * @param dto datos de la entidad
@@ -25,11 +29,10 @@ public interface AuthorService {
     void save(Long id, AuthorDto dto);
 
     /**
-     * Método para borrar una {@link Author}
+     * Método para crear o actualizar un {@link Author}
      *
      * @param id PK de la entidad
      */
     void delete(Long id) throws Exception;
 
 }
-
