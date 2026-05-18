@@ -1,12 +1,16 @@
 package com.ccsw.tutorial.customer;
 
+import com.ccsw.tutorial.customer.model.Customer;
 import com.ccsw.tutorial.customer.model.CustomerDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author ccsw
@@ -19,7 +23,10 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    CustomerService customerService;
+
+    @Autowired
+    ModelMapper mapper;
 
     /**
      * Método para recuperar todos los clientes
@@ -30,7 +37,8 @@ public class CustomerController {
     @GetMapping(path = "")
     public List<CustomerDto> findAll() {
 
-        return this.customerService.findAll();
+        List<Customer> customers = this.customerService.findAll();
+        return customers.stream().map(e -> mapper.map(e, CustomerDto.class)).collect(Collectors.toList());
     }
 
     /**
@@ -53,7 +61,7 @@ public class CustomerController {
      */
     @Operation(summary = "Delete", description = "Method that deletes a Customer")
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") Long id) throws Exception {
 
         this.customerService.delete(id);
     }

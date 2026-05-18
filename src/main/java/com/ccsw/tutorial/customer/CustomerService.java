@@ -1,5 +1,6 @@
 package com.ccsw.tutorial.customer;
 
+import com.ccsw.tutorial.customer.model.Customer;
 import com.ccsw.tutorial.customer.model.CustomerDto;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface CustomerService {
      *
      * @return {@link List} de {@link Customer}
      */
-    List<CustomerDto> findAll();
+    List<Customer> findAll();
 
     /**
      * Método para crear o actualizar una categoría
@@ -30,6 +31,6 @@ public interface CustomerService {
      *
      * @param id PK de la entidad
      */
-    void delete(Long id);
+    void delete(Long id) throws Exception;
 
 }

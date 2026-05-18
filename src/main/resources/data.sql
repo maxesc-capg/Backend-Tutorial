@@ -4,7 +4,6 @@ INSERT INTO category(name)
 VALUES ('Ameritrash');
 INSERT INTO category(name)
 VALUES ('Familiar');
-
 INSERT INTO author(name, nationality)
 VALUES ('Alan R. Moon', 'US');
 INSERT INTO author(name, nationality)
@@ -29,3 +28,10 @@ INSERT INTO game(title, age, category_id, author_id)
 VALUES ('Los viajes de Marco Polo', '12', 1, 3);
 INSERT INTO game(title, age, category_id, author_id)
 VALUES ('Azul', '8', 3, 5);
+
+INSERT INTO customer(name)
+VALUES ('Laufey Matters');
+INSERT INTO customer(name)
+VALUES ('Lewis Hamilton');
+INSERT INTO customer(name)
+VALUES ('Charles Leclerc');

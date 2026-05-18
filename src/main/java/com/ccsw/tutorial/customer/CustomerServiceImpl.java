@@ -1,55 +1,63 @@
 package com.ccsw.tutorial.customer;
 
+import com.ccsw.tutorial.customer.model.Customer;
 import com.ccsw.tutorial.customer.model.CustomerDto;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author ccsw
  *
  */
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private long SEQUENCE = 1;
-    private Map<Long, CustomerDto> customers = new HashMap<Long, CustomerDto>();
+    @Autowired
+    CustomerRepository customerRepository;
 
     /**
      * {@inheritDoc}
      */
-    public List<CustomerDto> findAll() {
+    @Override
+    public List<Customer> findAll() {
 
-        return new ArrayList<CustomerDto>(this.customers.values());
+        return (List<Customer>) this.customerRepository.findAll();
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void save(Long id, CustomerDto dto) {
 
-        CustomerDto Customer;
+        Customer Customer;
 
         if (id == null) {
-            Customer = new CustomerDto();
-            Customer.setId(this.SEQUENCE++);
-            this.customers.put(Customer.getId(), Customer);
+            Customer = new Customer();
         } else {
-            Customer = this.customers.get(id);
+            Customer = this.customerRepository.findById(id).orElse(null);
         }
 
         Customer.setName(dto.getName());
+
+        this.customerRepository.save(Customer);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    @Override
+    public void delete(Long id) throws Exception {
 
-        this.customers.remove(id);
+        if (this.customerRepository.findById(id).orElse(null) == null) {
+            throw new Exception("Not exists");
+        }
+
+        this.customerRepository.deleteById(id);
     }
 
 }
