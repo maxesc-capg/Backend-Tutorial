@@ -24,8 +24,15 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<Customer> findAll() {
-
         return (List<Customer>) this.customerRepository.findAll();
+    }
+
+    @Override
+    public List<Customer> getCustomers(String name) {
+        if (name != null && !name.isEmpty()) {
+            return customerRepository.findByNameIgnoreCase(name);
+        }
+        return (List<Customer>) customerRepository.findAll();
     }
 
     /**

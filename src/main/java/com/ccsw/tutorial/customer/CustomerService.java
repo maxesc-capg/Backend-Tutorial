@@ -19,6 +19,12 @@ public interface CustomerService {
     List<Customer> findAll();
 
     /**
+     * Método para recuperar NO TODOS los clientes
+     * @return {@link List} de {@link Customer}
+     */
+    List<Customer> getCustomers(String name);
+
+    /**
      * Método para crear o actualizar una categoría
      *
      * @param id PK de la entidad

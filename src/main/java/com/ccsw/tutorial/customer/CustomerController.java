@@ -41,6 +41,12 @@ public class CustomerController {
         return customers.stream().map(e -> mapper.map(e, CustomerDto.class)).collect(Collectors.toList());
     }
 
+    @GetMapping(path = "/customer")
+    public List<CustomerDto> getCustomers(@RequestParam(required = false) String name) {
+        List<Customer> customers = this.customerService.getCustomers(name);
+        return customers.stream().map(e -> mapper.map(e, CustomerDto.class)).collect(Collectors.toList());
+    }
+
     /**
      * Método para crear o actualizar un cliente
      *
