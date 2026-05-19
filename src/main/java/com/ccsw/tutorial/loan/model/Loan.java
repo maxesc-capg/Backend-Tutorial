@@ -10,100 +10,71 @@ import java.util.Date;
  * @author Max Escriva
  */
 @Entity
-@Table(name="loans")
+@Table(name = "loans")
 public class Loan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "game", nullable = false)
+    // Game y Customer son entidades relacionadas: se usa @ManyToOne + @JoinColumn,
+    // NO @Column, porque JPA necesita saber que son claves foráneas.
+    // Mi amiwi Claude
+
+    @ManyToOne
+    @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    @Column(name = "customer", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "loanStart", nullable = false)
+    @Column(name = "loan_start", nullable = false)
     private Date loanStart;
 
-    @Column(name = "loanEnd", nullable = false)
+    @Column(name = "loan_end", nullable = false)
     private Date loanEnd;
 
-    /**
-     * @return id
-     */
+
+    // Getters & Setters
 
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param id new value of {@link #getId()}
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return game
-     */
     public Game getGame() {
         return game;
     }
 
-    /**
-     *
-     * @param game new value of {@link #getGame()}
-     */
     public void setGame(Game game) {
         this.game = game;
     }
 
-    /**
-     *
-     * @return customer
-     */
     public Customer getCustomer() {
         return customer;
     }
 
-    /**
-     *
-     * @param customer new value of {@link #getCustomer()}
-     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    /**
-     *
-     * @return loanStart
-     */
     public Date getLoanStart() {
         return loanStart;
     }
 
-    /**
-     *
-     * @param loanStart new value of {@link #getLoanStart()}
-     */
     public void setLoanStart(Date loanStart) {
         this.loanStart = loanStart;
     }
 
-    /**
-     *
-     * @return getLoanEnd
-     */
     public Date getLoanEnd() {
         return loanEnd;
     }
 
-    /**
-     *
-     * @param loanEnd new value of {@link #getLoanEnd()}
-     */
     public void setLoanEnd(Date loanEnd) {
         this.loanEnd = loanEnd;
     }
