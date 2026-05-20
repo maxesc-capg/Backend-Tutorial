@@ -1,8 +1,7 @@
 package com.ccsw.tutorial.loan;
 
-import com.ccsw.tutorial.customer.model.Customer;
+
 import com.ccsw.tutorial.customer.model.CustomerDto;
-import com.ccsw.tutorial.game.model.Game;
 import com.ccsw.tutorial.game.model.GameDto;
 import com.ccsw.tutorial.loan.model.LoanDto;
 import com.ccsw.tutorial.loan.model.LoanSearchDto;
@@ -130,7 +129,7 @@ public class LoanIT {
                 new HttpEntity<>(searchDto),
                 responseTypePage);
 
-        assertNotNull(response);
+
         assertNotNull(response.getBody());
         response.getBody().getContent().forEach(loan ->
                 assertEquals(EXISTING_GAME_ID, loan.getGame().getId()));
@@ -149,7 +148,6 @@ public class LoanIT {
                 new HttpEntity<>(searchDto),
                 responseTypePage);
 
-        assertNotNull(response);
         assertNotNull(response.getBody());
         response.getBody().getContent().forEach(loan ->
                 assertEquals(EXISTING_CUSTOMER_ID, loan.getCustomer().getId()));
@@ -205,7 +203,18 @@ public class LoanIT {
                 new HttpEntity<>(searchDto),
                 responseTypePage);
 
+        ResponseEntity<Void> saveResponse = restTemplate.exchange(
+                LOCALHOST + port + SERVICE_PATH,
+                HttpMethod.PUT,
+                new HttpEntity<>(dto),
+                Void.class);
+
+// Añade esto temporalmente para ver el estado real
+        assertEquals(HttpStatus.OK, saveResponse.getStatusCode());
+
+
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(newLoanSize, response.getBody().getTotalElements());
 
         LoanDto loan = response.getBody().getContent().stream()
@@ -246,6 +255,7 @@ public class LoanIT {
                 responseTypePage);
 
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(TOTAL_LOANS, response.getBody().getTotalElements());
 
         LoanDto loan = response.getBody().getContent().stream()
@@ -303,6 +313,7 @@ public class LoanIT {
                 responseTypePage);
 
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(newLoansSize, response.getBody().getTotalElements());
     }
 

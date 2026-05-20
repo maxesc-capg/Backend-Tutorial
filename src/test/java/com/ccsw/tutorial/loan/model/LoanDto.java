@@ -11,8 +11,8 @@ import java.util.Date;
 public class LoanDto {
 
     private Long id;
-    private GameDto game;        // DTO, no la entidad
-    private CustomerDto customer; // DTO, no la entidad
+    private GameDto game;        // DTO, no la entidad!
+    private CustomerDto customer; // DTO, no la entidad!
     private Date loanStart;
     private Date loanEnd;
 
