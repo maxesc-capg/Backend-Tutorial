@@ -1,26 +1,19 @@
 package com.ccsw.tutorial.loan.model;
 
+
 import com.ccsw.tutorial.customer.model.Customer;
 import com.ccsw.tutorial.game.model.Game;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * @author Max Escriva
- */
 @Entity
-@Table(name = "loans")
+@Table(name = "loan")
 public class Loan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-
-    // Game y Customer son entidades relacionadas: se usa @ManyToOne + @JoinColumn,
-    // NO @Column, porque JPA necesita saber que son claves foráneas.
-    // Mi amiwi Claude
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
@@ -30,26 +23,14 @@ public class Loan {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "loan_start", nullable = false)
-    private Date loanStart;
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
 
-    @Column(name = "loan_end", nullable = false)
-    private Date loanEnd;
+    @Column(name = "end_date", nullable = false)
+    private LocalDate endDate;
 
 
-    // Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Game getGame() {
-        return game;
-    }
+// getters y setters
 
     public void setGame(Game game) {
         this.game = game;
@@ -63,19 +44,19 @@ public class Loan {
         this.customer = customer;
     }
 
-    public Date getLoanStart() {
-        return loanStart;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setLoanStart(Date loanStart) {
-        this.loanStart = loanStart;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public Date getLoanEnd() {
-        return loanEnd;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public void setLoanEnd(Date loanEnd) {
-        this.loanEnd = loanEnd;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 }

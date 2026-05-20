@@ -1,50 +1,54 @@
 package com.ccsw.tutorial.loan.model;
 
-import com.ccsw.tutorial.customer.model.CustomerDto;
-import com.ccsw.tutorial.game.model.GameDto;
-
 import java.time.LocalDate;
 
 /**
  * @author Max Escrivá
  */
-public class LoanDto {
 
-    private Long id;
-    private GameDto game;        // DTO, no la entidad!
-    private CustomerDto customer; // DTO, no la entidad!
+/* IMPORTANTE!!!! ESTO ES PARA CREAR Y EDITAR PRÉSTAMOS QUE VENGAN DEL FRONT!!!! */
+public class LoanSaveDto {
+    private Long gameId;
+    private Long customerId;
     private LocalDate startDate;
     private LocalDate endDate;
 
+    // getters y setters
+
     /**
-     * @return id
+     *
+     * @return gameId
      */
-    public Long getId() {
-        return id;
+    public Long getGameId() {
+        return gameId;
     }
 
     /**
-     * @param id new value of {@link #getId()}
+     *
+     * @param gameId new value of {@link #getGameId()}
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     /**
-     * @return customer
+     *
+     * @return customerId
      */
-    public CustomerDto getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param customer new value of {@link #getCustomer()}
+     *
+     * @param customerId new value of {@link #getCustomerId()}
      */
-    public void setCustomer(CustomerDto customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     /**
+     *
      * @return startDate
      */
     public LocalDate getStartDate() {
@@ -52,6 +56,7 @@ public class LoanDto {
     }
 
     /**
+     *
      * @param startDate new value of {@link #getStartDate()}
      */
     public void setStartDate(LocalDate startDate) {
@@ -59,6 +64,7 @@ public class LoanDto {
     }
 
     /**
+     *
      * @return endDate
      */
     public LocalDate getEndDate() {
@@ -66,10 +72,10 @@ public class LoanDto {
     }
 
     /**
+     *
      * @param endDate new value of {@link #getEndDate()}
      */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }
-
