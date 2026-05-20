@@ -35,3 +35,13 @@ INSERT INTO customer(name)
 VALUES ('Lewis Hamilton');
 INSERT INTO customer(name)
 VALUES ('Charles Leclerc');
+
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (1, 1, 1, '2024-01-01', '2024-01-10');
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (2, 2, 2, '2024-01-05', '2024-01-15');
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (3, 3, 3, '2024-01-10', '2024-01-20');
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (4, 1, 2, '2024-02-01', '2024-02-10');
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (5, 2, 3, '2024-02-05', '2024-02-15');
+INSERT INTO loans (id, game_id, customer_id, loan_start, loan_end) VALUES (6, 3, 1, '2024-02-10', '2024-02-20');
+
+--- Añadido para tests con H2
+ALTER TABLE loans ALTER COLUMN id RESTART WITH 7;
