@@ -1,6 +1,7 @@
 package com.ccsw.tutorial.loan;
 
 import com.ccsw.tutorial.loan.model.LoanDto;
+import com.ccsw.tutorial.loan.model.LoanSaveDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -30,7 +31,7 @@ public interface LoanService {
      * @param loan datos completos la entidad (juego, cliente, fecha inicio, fecha final)
      * @throws Exception si endDate es menor que startDate
      */
-    void save(LoanDto loan) throws Exception; /* Lanzará excepción si endDate < startDate */
+    void save(LoanSaveDto loan) throws Exception; /* Lanzará excepción si endDate < startDate */
 
     /**
      *
