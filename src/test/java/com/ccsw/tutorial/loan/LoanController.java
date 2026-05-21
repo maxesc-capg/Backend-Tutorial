@@ -1,86 +1,55 @@
 package com.ccsw.tutorial.loan;
 
-
-import com.ccsw.tutorial.loan.model.LoanSearchDto;
 import com.ccsw.tutorial.loan.model.LoanDto;
-import com.ccsw.tutorial.loan.model.Loan;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.modelmapper.ModelMapper;
+import com.ccsw.tutorial.loan.model.LoanSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Collectors;
+import java.time.LocalDate;
 
-/**
- * @author Max Escriva
- */
-
-
-// Anotaciones
-
-@Tag(name = "Loan", description = "API of Loan")
-@RequestMapping(value = "/loan")
+@Controller
 @RestController
+@RequestMapping(path = "/loan")
 @CrossOrigin(origins = "*")
 public class LoanController {
 
-    // Inject
-
     @Autowired
     LoanService loanService;
-    @Autowired
-    ModelMapper modelMapper;
 
-    /**
-     * Método para recuperar un listado paginado de {@link Loan}
-     *
-     * @param dto dto de búsqueda
-     * @return {@link Page} de {@link LoanDto}
-     */
-
-    @Operation(summary = "Find Page", description = "Method that return a page of Loans")
-    @PostMapping(path = "")
-    public Page<LoanDto> findPage(@RequestBody LoanSearchDto dto) {
-
-        Page<Loan> page = this.loanService.findPage(dto);
-
-        return new PageImpl<>(page.getContent().stream()
-                .map(loan -> modelMapper.map(loan, LoanDto.class))
-                .collect(Collectors.toList()),
-                page.getPageable(),
-                page.getTotalElements()
-        );
+    @GetMapping
+    public Page<LoanDto> findAll(@RequestParam(required = false) Long gameId, @RequestParam(required = false) Long customerId, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Pageable pageable) {
+        return loanService.findAll(gameId, customerId, date, pageable);
     }
 
-    /**
-     * Método para crear o actualizar un {@link Loan}
-     *
-     * @param id PK de la entidad
-     * @param dto datos de la entidad
-     */
-    @Operation(summary = "Save or Update", description = "Method that saves or updates a Loan")
-    @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody LoanDto dto) throws Exception {
-
-        this.loanService.save(id, dto);
-
+    /* ResponseEntity es una clase de Spring que representa la respuesta HTTP completa */
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody LoanSaveDto loan) { /* Comodín porque no sabemos qué nos devolverá */
+        loan.setId(id);
+        try {
+            loanService.save(loan);
+            return ResponseEntity.ok().build(); /* Si todo va bien, 200 OK sin body */
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage()); /* Si no va bien, mensaje de error */
+        }
     }
 
-    /**
-     * Método para borrar un {@link Loan}
-     *
-     * @param id PK de la entidad
-     */
-    @Operation(summary = "Delete", description = "Method that deletes a Loan")
-    @DeleteMapping(path = "/{id}")
-    public void delete(@PathVariable("id") Long id) throws Exception {
-
-        this.loanService.delete(id);
-
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody LoanSaveDto loan) { /* Comodín porque no sabemos qué nos devolverá */
+        try {
+            loanService.save(loan);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        loanService.delete(id);
+    }
 }
