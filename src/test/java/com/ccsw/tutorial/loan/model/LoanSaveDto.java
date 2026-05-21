@@ -8,12 +8,30 @@ import java.time.LocalDate;
 
 /* IMPORTANTE!!!! ESTO ES PARA CREAR Y EDITAR PRÉSTAMOS QUE VENGAN DEL FRONT!!!! */
 public class LoanSaveDto {
+    private Long id;
     private Long gameId;
     private Long customerId;
     private LocalDate startDate;
     private LocalDate endDate;
 
     // getters y setters
+
+
+    /**
+     *
+     * @return id of LoanSave
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @param id new value of {@link #getId()}
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      *
@@ -78,4 +96,5 @@ public class LoanSaveDto {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
 }
