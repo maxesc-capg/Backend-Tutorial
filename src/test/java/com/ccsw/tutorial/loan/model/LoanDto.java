@@ -17,7 +17,7 @@ public class LoanDto {
     private LocalDate endDate;
 
     /**
-     * @return id
+     * @return id of LoanDto
      */
     public Long getId() {
         return id;
@@ -28,6 +28,22 @@ public class LoanDto {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     *
+     * @return game
+     */
+    public GameDto getGame() {
+        return game;
+    }
+
+    /**
+     *
+     * @param game new value of {@link #getGame()}
+     */
+    public void setGame(GameDto game) {
+        this.game = game;
     }
 
     /**
